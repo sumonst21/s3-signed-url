@@ -108,6 +108,8 @@ if __name__ == '__main__':
 
     if args.time is None:
         expire = 60 * 60  # 1 hour
+    else:
+        expire = int(args.time)
 
     signed_url = get_s3_signed_url(path, expire)
 

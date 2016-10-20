@@ -14,11 +14,24 @@ DESCRIPTION:
 EXAMPLES:  
     If the link of your s3 object is https://s3-ap-southeast-1.amazonaws.com/devops/share/share.zip  
     ------------------------------------------------------------  
-    ./s3-signed-url.py -p devops/share/share.zip -t 60  
+    ./s3-signed-url.py -p devops/share/share.zip -t 600  
     ------------------------------------------------------------  
   
 NOTE:  
     You must set AWS credentials in environment variables  
     export AWS_ACCESS_KEY_ID=xxx  
     export AWS_SECRET_ACCESS_KEY=xxx
+```
+
+# Bash:
+```bash
+./s3-signed-url.py -p devops/share/share.zip -t 600  
+```
+
+# Output
+```
+Bucket: devops
+Object: share/share.zip
+Signed url: -------------------------->
+http://devops.s3.amazonaws.com/share/share.zip?AWSAccessKeyId=AKIAJOZ5UPG3QQ22TXYQ&Expires=1476959854&Signature=bpeuTv3Adz4g5HDm0ZtgmoDma38%3D
 ```
