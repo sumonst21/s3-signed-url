@@ -34,7 +34,7 @@ NOTE:
 or
 
 ```bash
-./s3-signed-url.py -u https://s3-ap-southeast-1.amazonaws.com/devops/share/share.zip -t 60
+./s3-signed-url.py -u https://s3-ap-southeast-1.amazonaws.com/devops/share/share.zip -t 600
 ```
 
 # Output
