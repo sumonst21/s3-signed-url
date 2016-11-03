@@ -21,7 +21,10 @@ EXAMPLES:
     ------------------------------------------------------------
 
 NOTE:
-    You must set AWS credentials in environment variables
+    - You need to install pyscrypto library:
+    pip install pycrypto
+
+    - You must set AWS credentials in environment variables:
     export AWS_ACCESS_KEY_ID=xxx
     export AWS_SECRET_ACCESS_KEY=xxx
 

@@ -4,12 +4,21 @@
 
 from __future__ import print_function
 import base64
-import hmac
-import sha
-import urllib
+try:
+    from Crypto.Hash import SHA, HMAC
+except ImportError:
+    print('You need to install pyscrypto library:')
+    print('pip install pycrypto')
+    exit(1)
+
 import time
 import os
 import argparse
+import urllib
+try:
+    from urllib.parse import quote as quote_plus
+except ImportError:
+    from urllib import quote_plus
 
 HELP = """
 Generate a signed S3 url
@@ -35,7 +44,10 @@ EXAMPLES:
     ------------------------------------------------------------
 
 NOTE:
-    You must set AWS credentials in environment variables
+    - You need to install pyscrypto library:
+    pip install pycrypto
+
+    - You must set AWS credentials in environment variables
     export AWS_ACCESS_KEY_ID=xxx
     export AWS_SECRET_ACCESS_KEY=xxx
 
@@ -99,15 +111,15 @@ def get_s3_signed_url(path, expire):
     bucket, obj = parse_bucket_obj(path)
     # Expiry Timestamp
     expiry_ts = int(time.time()) + expire
-    h = hmac.new(aws_secret_access_key,
-                 "GET\n\n\n%d\n/%s/%s" % (expiry_ts, bucket, obj),
-                 sha)
+    h = HMAC.new(bytes(aws_secret_access_key.encode('utf-8')),
+                 ("GET\n\n\n%d\n/%s/%s" % (expiry_ts, bucket, obj)).encode('utf-8'),
+                 SHA)
 
     # Signature
-    sig = urllib.quote_plus(base64.encodestring(h.digest()).strip())
+    sig = quote_plus(base64.encodestring(h.digest()).strip().decode('utf-8'))
 
     signed_url = 'http://%s.s3.amazonaws.com/%s?AWSAccessKeyId=%s&Expires=%d&Signature=%s' \
-                 % (bucket, obj, aws_access_key_id, expiry_ts, sig)
+                 % (bucket, quote_plus(obj), aws_access_key_id, expiry_ts, sig)
 
     return signed_url
 
