@@ -18,7 +18,7 @@ import urllib
 try:
     from urllib.parse import quote as quote_plus
 except ImportError:
-    from urllib import quote_plus
+    from urllib import quote as quote_plus
 
 HELP = """
 Generate a signed S3 url
@@ -118,7 +118,7 @@ def get_s3_signed_url(path, expire):
     # Signature
     sig = quote_plus(base64.encodestring(h.digest()).strip().decode('utf-8'))
 
-    signed_url = 'http://%s.s3.amazonaws.com/%s?AWSAccessKeyId=%s&Expires=%d&Signature=%s' \
+    signed_url = 'https://%s.s3.amazonaws.com/%s?AWSAccessKeyId=%s&Expires=%d&Signature=%s' \
                  % (bucket, quote_plus(obj), aws_access_key_id, expiry_ts, sig)
 
     return signed_url
