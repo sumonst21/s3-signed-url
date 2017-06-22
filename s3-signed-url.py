@@ -79,6 +79,7 @@ def parse_bucket_obj(path):
       (bucket, obj) (tuple): -- the bucket and object key path
     """
 
+    path = path.replace('s3://', '')
     path = path.strip()
     pos_com = path.find('.com/')
     if pos_com > 0:  # full url https://s3-ap-southeast-1.amazonaws.com/devops/share/share.zip
@@ -137,6 +138,8 @@ if __name__ == '__main__':
         exit(1)
     else:
         path = args.url.strip()
+        #path = 'van-test/monroe/Junie Mansueto_monster.docx'
+
 
     if args.time is None:
         expire = 60 * 60  # 1 hour
