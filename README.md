@@ -45,5 +45,5 @@ or
 Bucket: devops
 Object: share/share.zip
 Signed url: -------------------------->
-http://devops.s3.amazonaws.com/share/share.zip?AWSAccessKeyId=AKIAJOZ5UPG3QQ22TXYQ&Expires=1476959854&Signature=bpeuTv3Adz4g5HDm0ZtgmoDma38%3D
+http://devops.s3.amazonaws.com/share/share.zip?AWSAccessKeyId=AKIAXXXXXXXXXXXX&Expires=1476959854&Signature=bpeuTv3Adz4g5HDm0ZtgmoDma38%3D
 ```
